@@ -249,3 +249,763 @@ FROM
   -- table then saved as sleep_day_cleaned
 
 ```
+
+## Analyze Phase 
+
+### Data Summary 
+
+To begin the analysis phase we first summarize our cleaned data by participant to gather individual insights. We begin with the [daily_activity](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/fa1ec297d78f3ffbe7aeb93f78666f9223db0e01/daily_activity.csv) table: 
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: daily_activity
+
+SELECT 
+  Id,
+  COUNT(ActivityDate) as total_days_reported,
+  avg(cast(LightlyActiveMinutes as int)) as avg_light_activity_min,
+  avg(cast(FairlyActiveMinutes as int)) as avg_mod_activity_min,
+  avg(cast(VeryActiveMinutes as int)) as avg_high_activity_min, 
+  avg(cast(SedentaryMinutes as int)) as avg_sed_min,
+  avg(cast(Calories as int)) as avg_calories_burned
+FROM 
+  `black-heading-417023.FitBit_Data.daily_activity` 
+GROUP BY 
+  Id
+ORDER BY 
+  Id
+```
+
+```sql
+Results:
+
+[{
+  "Id": "1503960366",
+  "total_days_reported": "30",
+  "avg_light_activity_min": "227.26666666666668",
+  "avg_mod_activity_min": "19.799999999999997",
+  "avg_high_activity_min": "39.999999999999986",
+  "avg_sed_min": "828.43333333333328",
+  "avg_calories_burned": "1876.9666666666665"
+}, {
+  "Id": "1624580081",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "153.48387096774192",
+  "avg_mod_activity_min": "5.8064516129032251",
+  "avg_high_activity_min": "8.67741935483871",
+  "avg_sed_min": "1257.7419354838707",
+  "avg_calories_burned": "1483.3548387096776"
+}, {
+  "Id": "1644430081",
+  "total_days_reported": "30",
+  "avg_light_activity_min": "178.46666666666661",
+  "avg_mod_activity_min": "21.366666666666667",
+  "avg_high_activity_min": "9.5666666666666647",
+  "avg_sed_min": "1161.8666666666663",
+  "avg_calories_burned": "2811.3"
+}, {
+  "Id": "1844505072",
+  "total_days_reported": "21",
+  "avg_light_activity_min": "170.42857142857139",
+  "avg_mod_activity_min": "1.9047619047619049",
+  "avg_high_activity_min": "0.19047619047619047",
+  "avg_sed_min": "1130.1904761904761",
+  "avg_calories_burned": "1713.7619047619048"
+}, {
+  "Id": "1927972279",
+  "total_days_reported": "17",
+  "avg_light_activity_min": "70.3529411764706",
+  "avg_mod_activity_min": "1.4117647058823528",
+  "avg_high_activity_min": "2.4117647058823524",
+  "avg_sed_min": "1244.3529411764707",
+  "avg_calories_burned": "2303.0588235294117"
+}, {
+  "Id": "2022484408",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "257.45161290322585",
+  "avg_mod_activity_min": "19.354838709677416",
+  "avg_high_activity_min": "36.290322580645167",
+  "avg_sed_min": "1112.5806451612905",
+  "avg_calories_burned": "2509.9677419354839"
+}, {
+  "Id": "2026352035",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "256.64516129032262",
+  "avg_mod_activity_min": "0.25806451612903225",
+  "avg_high_activity_min": "0.0967741935483871",
+  "avg_sed_min": "689.41935483870964",
+  "avg_calories_burned": "1540.6451612903222"
+}, {
+  "Id": "2320127002",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "198.19354838709674",
+  "avg_mod_activity_min": "2.5806451612903225",
+  "avg_high_activity_min": "1.3548387096774193",
+  "avg_sed_min": "1220.0967741935483",
+  "avg_calories_burned": "1724.1612903225807"
+}, {
+  "Id": "2347167796",
+  "total_days_reported": "18",
+  "avg_light_activity_min": "252.5",
+  "avg_mod_activity_min": "20.555555555555561",
+  "avg_high_activity_min": "13.5",
+  "avg_sed_min": "687.16666666666674",
+  "avg_calories_burned": "2043.4444444444443"
+}, {
+  "Id": "2873212765",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "308.0",
+  "avg_mod_activity_min": "6.1290322580645169",
+  "avg_high_activity_min": "14.096774193548388",
+  "avg_sed_min": "1097.1935483870968",
+  "avg_calories_burned": "1916.9677419354841"
+}, {
+  "Id": "3372868164",
+  "total_days_reported": "20",
+  "avg_light_activity_min": "327.90000000000003",
+  "avg_mod_activity_min": "4.1",
+  "avg_high_activity_min": "9.15",
+  "avg_sed_min": "1077.55",
+  "avg_calories_burned": "1933.1000000000001"
+}, {
+  "Id": "3977333714",
+  "total_days_reported": "30",
+  "avg_light_activity_min": "174.76666666666668",
+  "avg_mod_activity_min": "61.266666666666659",
+  "avg_high_activity_min": "18.900000000000002",
+  "avg_sed_min": "707.53333333333342",
+  "avg_calories_burned": "1513.6666666666667"
+}, {
+  "Id": "4020332650",
+  "total_days_reported": "17",
+  "avg_light_activity_min": "140.29411764705884",
+  "avg_mod_activity_min": "9.764705882352942",
+  "avg_high_activity_min": "9.4705882352941178",
+  "avg_sed_min": "1070.2941176470586",
+  "avg_calories_burned": "2719.9411764705883"
+}, {
+  "Id": "4057192912",
+  "total_days_reported": "3",
+  "avg_light_activity_min": "137.33333333333334",
+  "avg_mod_activity_min": "2.0",
+  "avg_high_activity_min": "1.0",
+  "avg_sed_min": "1143.0",
+  "avg_calories_burned": "2039.6666666666667"
+}, {
+  "Id": "4319703577",
+  "total_days_reported": "30",
+  "avg_light_activity_min": "236.33333333333331",
+  "avg_mod_activity_min": "12.733333333333334",
+  "avg_high_activity_min": "3.6999999999999997",
+  "avg_sed_min": "760.33333333333348",
+  "avg_calories_burned": "2097.0333333333328"
+}, {
+  "Id": "4388161847",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "229.35483870967747",
+  "avg_mod_activity_min": "20.354838709677423",
+  "avg_high_activity_min": "23.161290322580644",
+  "avg_sed_min": "836.67741935483866",
+  "avg_calories_burned": "3093.8709677419356"
+}, {
+  "Id": "4445114986",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "209.09677419354838",
+  "avg_mod_activity_min": "1.741935483870968",
+  "avg_high_activity_min": "6.612903225806452",
+  "avg_sed_min": "829.90322580645181",
+  "avg_calories_burned": "2186.1935483870971"
+}, {
+  "Id": "4558609924",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "284.9677419354839",
+  "avg_mod_activity_min": "13.709677419354838",
+  "avg_high_activity_min": "10.38709677419355",
+  "avg_sed_min": "1093.6129032258068",
+  "avg_calories_burned": "2033.2580645161293"
+}, {
+  "Id": "4702921684",
+  "total_days_reported": "30",
+  "avg_light_activity_min": "245.4",
+  "avg_mod_activity_min": "26.9",
+  "avg_high_activity_min": "5.3",
+  "avg_sed_min": "743.9666666666667",
+  "avg_calories_burned": "2997.1666666666661"
+}, {
+  "Id": "5553957443",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "206.19354838709677",
+  "avg_mod_activity_min": "12.999999999999998",
+  "avg_high_activity_min": "23.419354838709676",
+  "avg_sed_min": "668.35483870967721",
+  "avg_calories_burned": "1875.6774193548385"
+}, {
+  "Id": "5577150313",
+  "total_days_reported": "28",
+  "avg_light_activity_min": "158.5",
+  "avg_mod_activity_min": "31.964285714285719",
+  "avg_high_activity_min": "93.571428571428569",
+  "avg_sed_min": "705.46428571428578",
+  "avg_calories_burned": "3469.6785714285706"
+}, {
+  "Id": "6117666160",
+  "total_days_reported": "23",
+  "avg_light_activity_min": "351.04347826086968",
+  "avg_mod_activity_min": "2.4782608695652177",
+  "avg_high_activity_min": "1.9130434782608696",
+  "avg_sed_min": "656.3478260869565",
+  "avg_calories_burned": "2427.434782608696"
+}, {
+  "Id": "6290855005",
+  "total_days_reported": "24",
+  "avg_light_activity_min": "274.83333333333343",
+  "avg_mod_activity_min": "4.583333333333333",
+  "avg_high_activity_min": "1.9583333333333326",
+  "avg_sed_min": "1142.9583333333333",
+  "avg_calories_burned": "2772.708333333333"
+}, {
+  "Id": "6775888955",
+  "total_days_reported": "17",
+  "avg_light_activity_min": "61.411764705882355",
+  "avg_mod_activity_min": "22.647058823529413",
+  "avg_high_activity_min": "16.823529411764703",
+  "avg_sed_min": "1225.0",
+  "avg_calories_burned": "2285.7058823529405"
+}, {
+  "Id": "6962181067",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "245.80645161290323",
+  "avg_mod_activity_min": "18.516129032258064",
+  "avg_high_activity_min": "22.806451612903224",
+  "avg_sed_min": "662.32258064516134",
+  "avg_calories_burned": "1982.0322580645161"
+}, {
+  "Id": "7007744171",
+  "total_days_reported": "24",
+  "avg_light_activity_min": "304.125",
+  "avg_mod_activity_min": "17.624999999999996",
+  "avg_high_activity_min": "33.625",
+  "avg_sed_min": "1078.6666666666665",
+  "avg_calories_burned": "2686.125"
+}, {
+  "Id": "7086361926",
+  "total_days_reported": "30",
+  "avg_light_activity_min": "148.63333333333333",
+  "avg_mod_activity_min": "26.199999999999996",
+  "avg_high_activity_min": "43.999999999999993",
+  "avg_sed_min": "830.79999999999984",
+  "avg_calories_burned": "2597.599999999999"
+}, {
+  "Id": "8053475328",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "150.96774193548384",
+  "avg_mod_activity_min": "9.5806451612903238",
+  "avg_high_activity_min": "85.161290322580626",
+  "avg_sed_min": "1147.9999999999995",
+  "avg_calories_burned": "2945.8064516129029"
+}, {
+  "Id": "8253242879",
+  "total_days_reported": "18",
+  "avg_light_activity_min": "123.38888888888887",
+  "avg_mod_activity_min": "15.111111111111109",
+  "avg_high_activity_min": "21.666666666666668",
+  "avg_sed_min": "1278.8888888888891",
+  "avg_calories_burned": "1887.3333333333333"
+}, {
+  "Id": "8378563200",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "156.09677419354841",
+  "avg_mod_activity_min": "10.25806451612903",
+  "avg_high_activity_min": "58.677419354838705",
+  "avg_sed_min": "716.1290322580644",
+  "avg_calories_burned": "3436.5806451612902"
+}, {
+  "Id": "8583815059",
+  "total_days_reported": "30",
+  "avg_light_activity_min": "142.90000000000003",
+  "avg_mod_activity_min": "22.933333333333337",
+  "avg_high_activity_min": "10.0",
+  "avg_sed_min": "1261.4666666666665",
+  "avg_calories_burned": "2823.1"
+}, {
+  "Id": "8792009665",
+  "total_days_reported": "19",
+  "avg_light_activity_min": "140.10526315789474",
+  "avg_mod_activity_min": "6.1578947368421044",
+  "avg_high_activity_min": "1.4736842105263157",
+  "avg_sed_min": "933.99999999999989",
+  "avg_calories_burned": "2192.5263157894742"
+}, {
+  "Id": "8877689391",
+  "total_days_reported": "31",
+  "avg_light_activity_min": "234.70967741935488",
+  "avg_mod_activity_min": "9.93548387096774",
+  "avg_high_activity_min": "66.064516129032256",
+  "avg_sed_min": "1112.8709677419354",
+  "avg_calories_burned": "3420.25806451613"
+}]
+```
+
+Using our individually summarized data, we then gather the group summarized data as well. 
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: daily_activity
+
+WITH daily_activity_summarized as (
+  SELECT 
+    Id,
+    COUNT(ActivityDate) as total_days_reported,
+    avg(cast(LightlyActiveMinutes as int)) as avg_light_activity_min,
+    avg(cast(FairlyActiveMinutes as int)) as avg_mod_activity_min,
+    avg(cast(VeryActiveMinutes as int)) as avg_high_activity_min, 
+    avg(cast(SedentaryMinutes as int)) as avg_sed_min,
+    avg(cast(Calories as int)) as avg_calories_burned
+  FROM 
+    `black-heading-417023.FitBit_Data.daily_activity` 
+  GROUP BY 
+    Id
+  ORDER BY 
+    Id
+  )
+
+-- query for group averages
+
+SELECT 
+  avg(cast(avg_light_activity_min as int)) as group_avg_LAM,    -- LAM = Light Activity Minutes
+  avg(cast(avg_mod_activity_min as int)) as group_avg_MAM,      -- MAM = Moderate Activity Minutes
+  avg(cast(avg_high_activity_min as int)) as group_avg_HAM,     -- HAM = Hight Activity Minutes
+  avg(cast(avg_sed_min as int)) as group_avg_SM
+FROM
+  daily_activity_summarized
+```
+
+```sql
+Results
+
+[{
+  "group_avg_LAM": "204.75609395558945",
+  "group_avg_MAM": "14.022107245116137",
+  "group_avg_HAM": "21.061443426763727",
+  "group_avg_SM": "973.12677055082588"
+}]
+```
+
+### 1. What is the impact of recommended moderate and high intensity activity on calories burned?
+
+
+Using our summarized [daily_activity](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/fa1ec297d78f3ffbe7aeb93f78666f9223db0e01/daily_activity.csv) data we can gather further information for question 1. 
+
+According to a paper published to the [NIH Website](https://www.ncbi.nlm.nih.gov/books/NBK499909/#:~:text=On%20average%2C%20a%20woman%20should,lose%20one%20pound%20per%20week.), women need to consume 2000 calories per day to mantain weight and men must consume 2500 calories per day to maintain weight. Due to the limitation of not knowing the gender of the participants, we use 2200 calories as the base number to measure net loss or gain. 
+
+The [World Health Organization](https://www.who.int/news-room/fact-sheets/detail/physical-activity#:~:text=should%20do%20at%20least%20an,least%203%20days%20a%20week.) recommends adults do a minimum of 150 minutes per week (21 minutes/day) of moderate intensity exercise or 75 minutes per week (10 minutes/day) of high intensity exercise.
+
+Using this information, we want to find out how many of the participants: 
+* Had a net loss of calories. 
+* Had an avg equal to or greather than 21 min of moderate intensity exercise.
+* Had an avg equal to or greather than 10 min of high intensity exercise. 
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: daily_activity
+
+WITH daily_activity_summarized as (
+  SELECT 
+    Id,
+    COUNT(ActivityDate) as total_days_reported,
+    avg(cast(LightlyActiveMinutes as int)) as avg_light_activity_min,
+    avg(cast(FairlyActiveMinutes as int)) as avg_mod_activity_min,
+    avg(cast(VeryActiveMinutes as int)) as avg_high_activity_min, 
+    avg(cast(SedentaryMinutes as int)) as avg_sed_min,
+    avg(cast(Calories as int)) as avg_calories_burned
+  FROM 
+    `black-heading-417023.FitBit_Data.daily_activity` 
+  GROUP BY 
+    Id
+  ORDER BY 
+    Id
+  )
+
+-- query for number of participants who had a net loss of calories 
+
+SELECT 
+  COUNT(*) as participants_with_net_loss_of_calories
+FROM
+  daily_activity_summarized
+WHERE 
+  avg_calories_burned > 2200
+```
+
+```sql
+Results:
+
+[{
+  "participants_with_net_loss_of_calories": "16"
+}]
+```
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: daily_activity
+
+WITH daily_activity_summarized as (
+  SELECT 
+    Id,
+    COUNT(ActivityDate) as total_days_reported,
+    avg(cast(LightlyActiveMinutes as int)) as avg_light_activity_min,
+    avg(cast(FairlyActiveMinutes as int)) as avg_mod_activity_min,
+    avg(cast(VeryActiveMinutes as int)) as avg_high_activity_min, 
+    avg(cast(SedentaryMinutes as int)) as avg_sed_min,
+    avg(cast(Calories as int)) as avg_calories_burned
+  FROM 
+    `black-heading-417023.FitBit_Data.daily_activity` 
+  GROUP BY 
+    Id
+  ORDER BY 
+    Id
+  )
+
+-- query for number of participants who acheived moderate or high activity intensity goal AND had a net loss of calories 
+
+SELECT 
+  count(*) as activity_and_calorie_goal_participants
+FROM
+  daily_activity_summarized
+WHERE 
+  avg_mod_activity_min >= 21 OR       -- 21 minutes/day = recommended weekly amount
+  avg_high_activity_min >= 10 AND     -- 10 minutes/day= recommended weekly amount
+  avg_calories_burned > 2200
+```
+
+
+```sql
+Results:
+
+[{
+  "activity_and_calorie_goal_participants": "13"
+}]
+
+-- 81% of the participants who averaged a total net loss of calories were those who acheived either/or
+the moderate/high activity intensity goal. 
+
+```
+
+Using R we load up our visualization packages and import the [daily_activity](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/fa1ec297d78f3ffbe7aeb93f78666f9223db0e01/daily_activity.csv) data to create our visualizations.
+
+``` r
+# installing and loading packages for analysis 
+
+install.packages("tidyverse")
+```
+
+``` r
+library(tidyverse)
+```
+
+    ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+    ## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+    ## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+    ## ✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+    ## ✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+    ## ✔ purrr     1.0.2
+
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## ✖ dplyr::filter() masks stats::filter()
+    ## ✖ dplyr::lag()    masks stats::lag()
+    ## ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+``` r
+library(lubridate)
+library(ggplot2)
+library(ggthemes)
+```
+
+``` r
+#creating daily activity table 
+
+daily_activity <- read.csv("daily_activity.csv")
+```
+
+``` r
+#daily activity summarized 
+
+daily_activity_summarized <- daily_activity %>% 
+  group_by(Id) %>% 
+  summarize (total_entries = n_distinct(ActivityDate), avg_fairly_active_min = mean(FairlyActiveMinutes),
+  avg_very_active_min = mean(VeryActiveMinutes), avg_calories_burned = mean(Calories))
+```
+
+``` r
+#plotting graph of Moderate Activity V Calories Burned 
+
+ggplot(data=daily_activity_summarized) +
+  geom_point(mapping=aes(x=avg_fairly_active_min, y=avg_calories_burned)) + 
+  labs(title="Moderate Activity V Calories Burned", x= "Average Fairly Active Minutes", y="Average Calories Burned")
+```
+
+![Average Moderate Activity Minutes V. Calories Burned](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/77dc5a75f369dce5791b5407a764deb3887672c1/Q1_MAvCalories.png)
+
+``` r
+#plotting graph of High Activity V Calories Burned 
+
+ggplot(data=daily_activity_summarized) +
+  geom_point(mapping=aes(x=avg_very_active_min, y=avg_calories_burned)) + 
+  labs(title="High Activity V Calories Burned", x= "Average Very Active Minutes", y="Average Calories Burned")
+```
+
+![Average High Activity Minutes V. Calories Burned](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/86093af185c79d97994dd591b6fe0254c2fcd247/Q1_HAvCalories.png)
+
+
+
+### 2. What is the impact of recommended steps on calories burned?
+
+We will be using our cleaned [daily_steps](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/fa1ec297d78f3ffbe7aeb93f78666f9223db0e01/daily_steps.csv) and [daily_calories](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/fa1ec297d78f3ffbe7aeb93f78666f9223db0e01/daily_calories.csv) dataset to answer the second question. 
+
+
+The [CDC](https://www.cdc.gov/physicalactivity/basics/pa-health/index.htm#:~:text=Taking%20more%20steps%20a%20day,to%208%2C000%20steps%20per%20day.) recommends 8,000-10,000 steps per day for adults. We will use 9,0000 steps as the minimum recommended value in our analysis. 
+
+Using our 2200 calorie base as before we will:
+
+* Calculate the number of participants with calorie loss.
+
+* Calculate the percent of people who acheived an average of 9,000 steps per day and had a net calorie loss. 
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: daily_steps & daily_calories
+
+-- table saved as daily_steps_and_calories_merged for analysis in R
+
+WITH daily_steps_and_calories_merged as (
+  SELECT
+    daily_steps.Id,
+    COUNT(DISTINCT(daily_steps.ActivityDay)) as days_reported,
+    avg(cast(daily_steps.StepTotal as int)) as avg_total_steps,
+    avg(cast(daily_calories.Calories as int)) as avg_daily_calories
+  FROM 
+    black-heading-417023.FitBit_Data.daily_steps 
+  INNER JOIN
+    FitBit_Data.daily_calories ON
+    daily_steps.Id =  daily_calories.Id
+  GROUP BY 
+    daily_steps.Id
+)
+
+-- query for number of participants that acheived an average of 9,000 steps per day 
+
+SELECT 
+  COUNT(*) as num_of_participants_acheived_step_goal
+FROM
+  daily_steps_and_calories_merged
+WHERE 
+  avg_total_steps > 9000
+```
+
+```sql
+Results:
+
+[{
+  "num_of_participants_acheived_step_goal": "10"
+}]
+```
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: daily_steps & daily_calories
+
+WITH daily_steps_and_calories_merged as (
+  SELECT
+    daily_steps.Id,
+    COUNT(DISTINCT(daily_steps.ActivityDay)) as days_reported,
+    avg(cast(daily_steps.StepTotal as int)) as avg_total_steps,
+    avg(cast(daily_calories.Calories as int)) as avg_daily_calories
+  FROM 
+    black-heading-417023.FitBit_Data.daily_steps 
+  INNER JOIN
+    FitBit_Data.daily_calories ON
+    daily_steps.Id =  daily_calories.Id
+  GROUP BY 
+    daily_steps.Id
+)
+
+-- query for number of participants that averaged 9,000 steps per day AND lost an average of more than 2200 calories per day 
+
+SELECT 
+  COUNT(*) as num_of_participants_steps_and_calorie_goal
+FROM
+  daily_steps_and_calories_merged
+WHERE 
+  avg_total_steps > 9000 AND
+  avg_daily_calories > 2200
+```
+
+```sql
+Results:
+
+[{
+  "num_of_participants_steps_and_calorie_goal": "6"
+}]
+
+--60% (6/10) of participants who averaged 9,000 steps per day also averaged more than 2,200 calories burned per day
+```
+
+Using R and our [daily_steps_and_calories_merged](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/77dc5a75f369dce5791b5407a764deb3887672c1/daily_steps_and_calories_merged.csv)  data we create our visualizations:
+
+``` r
+# loading needed packages 
+
+library(skimr)
+library(ggplot2)
+library(ggthemes)
+```
+
+``` r
+#creating dailyStepsAndCalories table
+
+dailyStepsAndCalories <- read.csv("daily_steps_and_calories_merged.csv")
+```
+
+``` r
+#plotting Average Daily Steps v Calories Burned scatter plot
+
+ggplot(data=dailyStepsAndCalories) +
+  geom_point(mapping=aes(x=avg_total_steps, y=avg_daily_calories)) +
+  labs(title="Average Daily Steps v Calories Burned", x="Average Daily Steps", y="Avg Calories Burned")
+```
+
+![Average Steps V. Calories Burned](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/b5f7f70879c2b9da8b9e6349394e929d5f32a2f9/Q2_StepsVCalories.png)
+
+
+### 3. Does the total amount of active minutes affect the percentage of time asleep while in bed?
+
+Using our [sleep_day_cleaned](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/fa1ec297d78f3ffbe7aeb93f78666f9223db0e01/sleep_day_cleaned.csv) and [daily_activity](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/fa1ec297d78f3ffbe7aeb93f78666f9223db0e01/daily_activity.csv) data table we will attempt to see if there is a relationship between total amount of physical activity (moderate intensity + high intensity exercise) and percentage of time asleep in bed (total minutes asleep/total time in bed). 
+
+The National Sleep Foundation has an article titled, ["How Do you Measure Good Sleep Quality?"](https://www.thensf.org/what-is-sleep-quality/#:~:text=People%20with%20good%20sleep%20quality,more%20for%20optimal%20health%20benefits.) where they advise that good sleep efficiency is the amount of time you spend actually sleeping while in bed. Ideally this number should be 85% or higher for optimal health benefits, according to the National Sleep Foundation.
+
+We will use the following to metrics in our analysis: 
+* Number of participants that acheived a sleep efficiency of >= 85%.
+* Number of participants that acheived the average recommended minutes active.
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: sleep_day_cleaned & daily_activity
+
+-- data saved as sleepDaySummarized for analysis in R
+
+WITH pa_and_sleep as (
+  SELECT
+  SDC.Id,
+  avg(daily_activity.FairlyActiveMinutes) as avg_fairly_active_min,
+  avg(daily_activity.VeryActiveMinutes) as avg_very_active_min,
+  avg(SDC.TotalMinutesAsleep/SDC.TotalTimeInBed) * 100 as avg_percent_of_time_asleep
+FROM
+  black-heading-417023.FitBit_Data.sleep_day_cleaned as SDC
+INNER JOIN
+  FitBit_Data.daily_activity ON
+  SDC.Id = daily_activity.Id
+GROUP BY 
+  SDC.Id
+)
+
+-- number of participants with good sleep efficiency 
+
+SELECT
+  COUNT(*) as participants_with_good_sleep_efficiency
+FROM 
+  pa_and_sleep
+WHERE 
+  avg_percent_of_time_asleep >= 85
+```
+
+```sql
+Result:
+
+[{
+  "participants_with_good_sleep_efficiency": "24"
+}]
+```
+
+```sql
+-- projectname: black-heading-417023
+-- datasetname: FitBit_Data
+-- tablename: sleep_day_cleaned & daily_activity
+
+WITH pa_and_sleep as (
+  SELECT
+  SDC.Id,
+  avg(daily_activity.FairlyActiveMinutes) as avg_fairly_active_min,
+  avg(daily_activity.VeryActiveMinutes) as avg_very_active_min,
+  avg(SDC.TotalMinutesAsleep/SDC.TotalTimeInBed) * 100 as avg_percent_of_time_asleep
+FROM
+  black-heading-417023.FitBit_Data.sleep_day_cleaned as SDC
+INNER JOIN
+  FitBit_Data.daily_activity ON
+  SDC.Id = daily_activity.Id
+GROUP BY 
+  SDC.Id
+)
+
+-- number of participants who reach recommended levels of activity and good sleep efficiency 
+
+SELECT
+  COUNT(*) as participants_with_good_sleep_efficiency
+FROM 
+  pa_and_sleep
+WHERE 
+  avg_fairly_active_min >=21 OR
+  avg_very_active_min >=10 AND
+  avg_percent_of_time_asleep >=85
+```
+
+```sql
+Result:
+
+[{
+  "participants_with_good_sleep_efficiency": "15"
+}]
+
+Of the participants who acheived good sleep efficiency 62.5% (15/24) were those who acheived the recommened physical activity average/day
+```
+
+Using R and our [sleepDaySummarized](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/77dc5a75f369dce5791b5407a764deb3887672c1/sleepDaySummairzed.csv) data we create our visualizations:
+
+``` r
+# loding needed packages 
+
+library(skimr)
+library(ggplot2)
+library(ggthemes)
+```
+
+``` r
+# creating sleepDay table
+
+sleepDay <- read.csv("sleepDaySummarized.csv")
+```
+
+``` r
+#plotting Average Fairly Active Min v. Sleep Efficiency scatter plot
+
+ggplot(data=sleepDay) +
+  geom_point(mapping=aes(x=avg_fairly_active_min, y=avg_percent_of_time_asleep)) + 
+  labs(title = "Average Fairly Active Min v. Sleep Efficiency", x="Average Fairly Active Min", y= "Percentage of Time Asleep")
+```
+
+![Fairly Active Minutes V. Sleep Efficiency](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/4bf2e8bc4f30cfdd9b42f6fb88bfe910de8ab1d2/Q3_FAMvSleepEff.png)
+
+``` r
+#plotting Average Very Active Minutes v. Sleep Percentage scatter plot
+
+ggplot(data=sleepDay) + 
+  geom_point(mapping=aes(x=avg_very_active_min, y=avg_percent_of_time_asleep)) + 
+  labs(title= "Very Active Minutes V. Sleep Efficiency", x="Average Very Active Minutes", y= "Percentage of Time Asleep")
+```
+
+![Very Active Minutes V. Sleep Efficiency](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/b5f7f70879c2b9da8b9e6349394e929d5f32a2f9/Q3_VAMvSleepEff.png)
