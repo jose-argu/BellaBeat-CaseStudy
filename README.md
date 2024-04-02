@@ -1062,3 +1062,16 @@ For the Bellabeat membership to create schedules, reminders, and timelines focus
 
 1. Net calorie/weight loss.
 2. Improved sleep efficiency.  
+
+
+## Sources 
+
+FitBit Fitness Data: https://www.kaggle.com/datasets/arashnic/fitbit
+
+"Calories": https://www.ncbi.nlm.nih.gov/books/NBK499909/#:~:text=On%20average%2C%20a%20woman%20should,lose%20one%20pound%20per%20week.
+
+"Physical Activity": https://www.who.int/news-room/fact-sheets/detail/physical-activity#:~:text=should%20do%20at%20least%20an,least%203%20days%20a%20week.
+
+"Benefits of Physical Activity": https://www.cdc.gov/physicalactivity/basics/pa-health/index.htm#:~:text=Taking%20more%20steps%20a%20day,to%208%2C000%20steps%20per%20day.
+
+"What is Sleep Quality?": https://www.thensf.org/what-is-sleep-quality/#:~:text=People%20with%20good%20sleep%20quality,more%20for%20optimal%20health%20benefits. 
