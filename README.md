@@ -834,7 +834,8 @@ WITH daily_steps_and_calories_merged as (
     daily_steps.Id
 )
 
--- query for number of participants that averaged 9,000 steps per day AND lost an average of more than 2200 calories per day 
+-- query for number of participants that averaged 9,000 steps per day AND lost an average of more than
+   2200 calories per day 
 
 SELECT 
   COUNT(*) as num_of_participants_steps_and_calorie_goal
@@ -1009,3 +1010,55 @@ ggplot(data=sleepDay) +
 ```
 
 ![Very Active Minutes V. Sleep Efficiency](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/b5f7f70879c2b9da8b9e6349394e929d5f32a2f9/Q3_VAMvSleepEff.png)
+
+## Share Phase 
+
+### Calories:
+
+16 participants averaged a net loss of calories (>=2200 calories burned/day). 
+
+
+### Active Minutes
+
+The active minutes for our group of participants:
+- Average Light Active Minutes: 204.75 Minutes/Day. 
+- Average Moderate Active Minutes: 14.02 Minutes/Day.
+- Average Very Active Minutes: 21.06 Minutes/Day.
+
+Of the 16 participants who averaged a net calorie loss, 13 (86%) of them were participants who acheived the recommended minutes of moderate and/or high activity. The charts below
+show a positive correlation between average moderate active minutes and average calories burned, as well as between average high activity minutes and average calories burned. 
+
+![Average Moderate Activity Minutes V. Calories Burned](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/77dc5a75f369dce5791b5407a764deb3887672c1/Q1_MAvCalories.png)
+
+![Average High Activity Minutes V. Calories Burned](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/86093af185c79d97994dd591b6fe0254c2fcd247/Q1_HAvCalories.png)
+
+
+### Steps 
+
+10 participants acheived the recommended average of 9,000 steps/day. Of those 10 participants, 6 (60%) acheived net loss of calories. 
+
+![Average Steps V. Calories Burned](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/b5f7f70879c2b9da8b9e6349394e929d5f32a2f9/Q2_StepsVCalories.png)
+
+
+### Sleep
+
+24 participants acheived a good sleep efficiency (total time asleep/total time in bed > 85%). Of those 24 participants, 15 (62.5%) were those meeting the recommended minutes of moderate and/or high activity. There were a total of 16 participants meeting the moderate and/or high activity and 15 (93.75%) of them acheived good sleep efficiency.
+
+![Fairly Active Minutes V. Sleep Efficiency](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/4bf2e8bc4f30cfdd9b42f6fb88bfe910de8ab1d2/Q3_FAMvSleepEff.png)
+
+
+
+
+![Very Active Minutes V. Sleep Efficiency](https://github.com/jose-argu/BellaBeat-CaseStudy/blob/b5f7f70879c2b9da8b9e6349394e929d5f32a2f9/Q3_VAMvSleepEff.png)
+
+
+## Act 
+
+### Recommendations
+
+Due to the strong correalation between the average moderate activity minutes, average high activity minutes and calories burned I would suggest: 
+
+For the Bellabeat membership to create schedules, reminders, and timelines focusing on moderate activity minutes and high activity minutes that can be sent out by any of its products (app, watch, etc) if the users goal is: 
+
+1. Net calorie/weight loss.
+2. Improved sleep efficiency.  
