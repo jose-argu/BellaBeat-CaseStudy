@@ -1066,7 +1066,7 @@ For the Bellabeat membership to create schedules, reminders, and timelines focus
 
 ## Sources 
 
-FitBit Fitness Data: https://www.kaggle.com/datasets/arashnic/fitbit
+FitBit Fitness Data: https://www.kaggle.com/datasets/arashnic/fitbit.
 
 "Calories": https://www.ncbi.nlm.nih.gov/books/NBK499909/#:~:text=On%20average%2C%20a%20woman%20should,lose%20one%20pound%20per%20week.
 
